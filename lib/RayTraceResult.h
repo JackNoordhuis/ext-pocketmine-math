@@ -22,11 +22,17 @@ public:
         this->hitVector = hitVector;
     }
 
-    const AxisAlignedBB *getBoundingBox();
+    AxisAlignedBB *getBoundingBox() {
+        return (AxisAlignedBB *)bb;
+    }
 
-    int getHitFace();
+    int getHitFace() {
+        return hitFace;
+    }
 
-    const Vector3 *getHitVector();
+    Vector3 *getHitVector() {
+        return (Vector3 *)hitVector;
+    }
 };
 
 #endif //EXT_POCKETMINE_MATH_RAYTRACERESULT_H
