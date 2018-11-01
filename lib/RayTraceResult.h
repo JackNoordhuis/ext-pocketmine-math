@@ -12,21 +12,21 @@
  */
 class RayTraceResult {
 public:
-    AxisAlignedBB bb;
+    const AxisAlignedBB *bb;
     int hitFace;
-    Vector3 hitVector;
+    const Vector3 *hitVector;
 
-    RayTraceResult(AxisAlignedBB bb, int hitFace, Vector3 hitVector) {
-        RayTraceResult::bb = bb;
-        RayTraceResult::hitFace = hitFace;
-        RayTraceResult::hitVector = hitVector;
+    RayTraceResult(const AxisAlignedBB *bb, int hitFace, const Vector3 *hitVector) {
+        this->bb = bb;
+        this->hitFace = hitFace;
+        this->hitVector = hitVector;
     }
 
-    AxisAlignedBB getBoundingBox();
+    const AxisAlignedBB *getBoundingBox();
 
     int getHitFace();
 
-    Vector3 getHitVector();
+    const Vector3 *getHitVector();
 };
 
 #endif //EXT_POCKETMINE_MATH_RAYTRACERESULT_H

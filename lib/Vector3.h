@@ -12,9 +12,9 @@ public:
     double z;
 
     Vector3(double x, double y, double z) {
-        Vector3::x = x;
-        Vector3::y = y;
-        Vector3::z = z;
+        this->x = x;
+        this->y = y;
+        this->z = z;
     }
 
     double getX();
@@ -86,9 +86,9 @@ public:
 
     Vector3 *normalize();
 
-    double cross(Vector3 *v);
+    double cross(const Vector3 *v);
 
-    bool equals(Vector3 *v);
+    bool equals(const Vector3 *v);
 
     /**
      * Returns a new vector with x value equal to the second parameter, along the line between this vector and the
@@ -99,7 +99,7 @@ public:
      *
      * @return
      */
-    Vector3 *getIntermediateWithXValue(Vector3 *v, double x);
+    Vector3 *getIntermediateWithXValue(const Vector3 *v, double x);
 
     /**
      * Returns a new vector with y value equal to the second parameter, along the line between this vector and the
@@ -110,7 +110,7 @@ public:
      *
      * @return
      */
-    Vector3 *getIntermediateWithYValue(Vector3 *v, double y);
+    Vector3 *getIntermediateWithYValue(const Vector3 *v, double y);
 
     /**
      * Returns a new vector with z value equal to the second parameter, along the line between this vector and the
@@ -121,7 +121,7 @@ public:
      *
      * @return
      */
-    Vector3 *getIntermediateWithZValue(Vector3 *v, double z);
+    Vector3 *getIntermediateWithZValue(const Vector3 *v, double z);
 
     Vector3 *setComponents(double x, double y, double z);
 };

@@ -38,7 +38,7 @@ public:
      *
      * //TODO: Return PHP Generator
      */
-    static void inDirection(Vector3 *start, Vector3 *directionViewer, double maxDistance);
+    static void inDirection(const Vector3 *start, const Vector3 *directionViewer, double maxDistance);
 
     /**
      * Performs a ray trace between the start and end coordinates. This returns a Generator which yields Vector3s
@@ -49,7 +49,7 @@ public:
      *
      * //TODO: Return PHP Generator
      */
-    static void betweenPoints(Vector3 *start, Vector3 *end);
+    static void betweenPoints(const Vector3 *start, const Vector3 *end);
 };
 
 #endif //EXT_POCKETMINE_MATH_VOXELRAYTRACE_H

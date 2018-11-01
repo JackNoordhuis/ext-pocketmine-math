@@ -40,17 +40,17 @@ public:
 
     bool isSquare();
 
-    Matrix *add(Matrix *matrix);
+    Matrix *add(const Matrix *matrix);
 
-    Matrix *subtract(Matrix *matrix);
+    Matrix *subtract(const Matrix *matrix);
 
-    Matrix *multiplyScalar(Matrix *matrix);
+    Matrix *multiplyScalar(const Matrix *matrix);
 
-    Matrix *divideScalar(Matrix *matrix);
+    Matrix *divideScalar(const Matrix *matrix);
 
-    Matrix *transpose(Matrix *matrix);
+    Matrix *transpose(const Matrix *matrix);
 
-    Matrix *determinant(Matrix *matrix);
+    Matrix *determinant(const Matrix *matrix);
 };
 
 #endif //EXT_POCKETMINE_MATH_MATRIX_H

@@ -11,8 +11,8 @@ public:
     double y;
 
     Vector2(double x = 0, double y = 0) {
-        Vector2::x = x;
-        Vector2::y = y;
+        this->x = x;
+        this->y = y;
     }
 
     double getX();
@@ -47,6 +47,6 @@ public:
 
     Vector2 *normalize();
 
-    double dot(Vector2 *v);
+    double dot(const Vector2 *v);
 };
 #endif //EXT_POCKETMINE_MATH_VECTOR2_H
