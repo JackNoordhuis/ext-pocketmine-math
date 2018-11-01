@@ -59,11 +59,3 @@ int Bearing::fromAngle(double angle) {
 
     return EAST;
 }
-
-int Bearing::rotate(int bearing, int step) {
-    return (bearing + step) & 0x03;
-}
-
-int Bearing::opposite(int bearing) {
-    return bearing ^ 2;
-}

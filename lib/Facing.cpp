@@ -25,23 +25,6 @@ const int Facing::HORIZONTAL[4] = {
     Facing::EAST,
 };
 
-int Facing::axis(int direction) {
-    return direction >> 1; // shift off positive/negative bit
-}
-
-bool Facing::isPositive(int direction) {
-    return (direction & FLAG_AXIS_POSITIVE) == FLAG_AXIS_POSITIVE;
-}
-
-int Facing::opposite(int direction) {
-    return direction ^ FLAG_AXIS_POSITIVE;
-}
-
-int Facing::rotate(int direction, int axis, bool clockwise) {
-    int rotated = Facing::clockwise(axis, direction);
-    return clockwise ? rotated : opposite(rotated);
-}
-
 void Facing::validate(int facing) {
     if(std::find(std::begin(ALL), std::end(ALL), facing) != std::end(ALL)) {
         throw std::invalid_argument("Invalid direction " + std::to_string(facing));

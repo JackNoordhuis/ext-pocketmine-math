@@ -33,7 +33,9 @@ public:
      *
      * @return
      */
-    static int axis(int direction);
+    static int axis(int direction) {
+        return direction >> 1; // shift off positive/negative bit
+    }
 
     /**
      * Returns whether the direction is facing the positive of its axis.
@@ -42,7 +44,9 @@ public:
      *
      * @return
      */
-    static bool isPositive(int direction);
+    static bool isPositive(int direction) {
+        return (direction & FLAG_AXIS_POSITIVE) == FLAG_AXIS_POSITIVE;
+    }
 
     /**
      * Returns the opposite Facing of the specified one.
@@ -51,7 +55,9 @@ public:
      *
      * @return
      */
-    static int opposite(int direction);
+    static int opposite(int direction) {
+        return direction ^ FLAG_AXIS_POSITIVE;
+    }
 
     /**
      * Rotates the given direction around the axis.
@@ -64,7 +70,10 @@ public:
      *
      * @throws invalid_argument if not possible to rotate direction around axis
      */
-    static int rotate(int direction, int axis, bool clockwise);
+    static int rotate(int direction, int axis, bool clockwise) {
+        int rotated = Facing::clockwise(axis, direction);
+        return clockwise ? rotated : opposite(rotated);
+    }
 
     /**
      * Validates the given integer as a Facing direction.

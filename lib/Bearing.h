@@ -32,9 +32,13 @@ public:
 
     static int fromAngle(double angle);
 
-    static int rotate(int bearing, int step);
+    static int rotate(int bearing, int step) {
+        return (bearing + step) & 0x03;
+    }
 
-    static int opposite(int bearing);
+    static int opposite(int bearing) {
+        return bearing ^ 2;
+    }
 };
 
 #endif //EXT_POCKETMINE_MATH_BEARING_H
