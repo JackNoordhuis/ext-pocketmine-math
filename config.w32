@@ -1,0 +1,19 @@
+// $Id$
+// vim:ft=javascript
+
+ARG_ENABLE("pocketmine-math", "Enable PocketMine Math extension", "no");
+
+if (PHP_POCKETMINE_MATH != "no") {
+	EXTENSION("pocketmine_math", pocketmine_math.cpp", PHP_POCKETMINE_SHARED, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 /I" + configure_module_dirname);
+	ADD_FLAG("CFLAGS_POCKETMINE_MATH", "/EHsc");
+	ADD_SOURCES(
+		configure_module_dirname + "/src",
+		"PhpFacing.cpp",
+		"pocketmine_math"
+	);
+	ADD_SOURCES(
+		configure_module_dirname + "/lib",
+		"AxisAlignedBB.cpp Bearing.cpp Facing.cpp",
+		"pocketmine_math"
+	);
+}
