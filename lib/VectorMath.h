@@ -9,7 +9,9 @@
 
 class VectorMath {
 public:
-    static Vector2 *getDirection2D(double azimuth);
+    static Vector2 *getDirection2D(double azimuth) {
+        return new Vector2(cos(azimuth), sin(azimuth));
+    }
 };
 
 #endif //EXT_POCKETMINE_MATH_VECTORMATH_H

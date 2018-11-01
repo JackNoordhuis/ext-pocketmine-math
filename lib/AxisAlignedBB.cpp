@@ -169,7 +169,7 @@ bool AxisAlignedBB::isVectorInXY(const Vector3 *vector) {
     return vector->x >= minX and vector->x <= maxX and vector->y >= minY and vector->y <= maxY;
 }
 
-RayTraceResult *AxisAlignedBB::calculateIntercept(const Vector3 *pos1, const Vector3 *pos2) {
+RayTraceResult *AxisAlignedBB::calculateIntercept(Vector3 *pos1, Vector3 *pos2) {
     const Vector3 *v1 = pos1->getIntermediateWithXValue(pos2, minX);
     const Vector3 *v2 = pos1->getIntermediateWithXValue(pos2, maxX);
     const Vector3 *v3 = pos1->getIntermediateWithYValue(pos2, minY);

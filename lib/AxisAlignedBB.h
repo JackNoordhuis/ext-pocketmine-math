@@ -263,7 +263,7 @@ public:
      *
      * @return
      */
-    RayTraceResult *calculateIntercept(const Vector3 *pos1, const Vector3 *pos2);
+    RayTraceResult *calculateIntercept(Vector3 *pos1, Vector3 *pos2);
 };
 
 #endif //EXT_POCKETMINE_MATH_AXISALIGNEDBB_H
