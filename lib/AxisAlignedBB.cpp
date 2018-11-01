@@ -11,7 +11,7 @@
 #include <stdexcept>
 #include <string>
 
-AxisAlignedBB *AxisAlignedBB::setBounds(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+AxisAlignedBB *AxisAlignedBB::setBounds(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
     if(minX > maxX) {
         throw std::invalid_argument("minX " + std::to_string(minX) + " is larger than maxX " + std::to_string(maxX));
     }
@@ -34,13 +34,13 @@ AxisAlignedBB *AxisAlignedBB::setBounds(float minX, float minY, float minZ, floa
     return this;
 }
 
-AxisAlignedBB *AxisAlignedBB::addCoord(float x, float y, float z) {
-    float minX = this->minX;
-    float minY = this->minY;
-    float minZ = this->minZ;
-    float maxX = this->maxX;
-    float maxY = this->maxY;
-    float maxZ = this->maxZ;
+AxisAlignedBB *AxisAlignedBB::addCoord(double x, double y, double z) {
+    double minX = this->minX;
+    double minY = this->minY;
+    double minZ = this->minZ;
+    double maxX = this->maxX;
+    double maxY = this->maxY;
+    double maxZ = this->maxZ;
 
     if(x < 0) {
         minX += x;
@@ -63,7 +63,7 @@ AxisAlignedBB *AxisAlignedBB::addCoord(float x, float y, float z) {
     return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 }
 
-float AxisAlignedBB::calculateXOffset(const AxisAlignedBB *bb, float x) {
+double AxisAlignedBB::calculateXOffset(const AxisAlignedBB *bb, double x) {
     if(bb->maxY <= minZ or bb->minY >= maxY) {
         return x;
     }
@@ -73,12 +73,12 @@ float AxisAlignedBB::calculateXOffset(const AxisAlignedBB *bb, float x) {
     }
 
     if(x > 0 and bb->maxX <= minX) {
-        float x1 = minX - bb->maxX;
+        double x1 = minX - bb->maxX;
         if(x1 < x) {
             x = x1;
         }
     } else if(x < 0 and bb->minX >= maxX) {
-        float x2 = maxX - bb->minX;
+        double x2 = maxX - bb->minX;
         if(x2 > x) {
             x = x2;
         }
@@ -87,7 +87,7 @@ float AxisAlignedBB::calculateXOffset(const AxisAlignedBB *bb, float x) {
     return x;
 }
 
-float AxisAlignedBB::calculateYOffset(const AxisAlignedBB *bb, float y) {
+double AxisAlignedBB::calculateYOffset(const AxisAlignedBB *bb, double y) {
     if(bb->maxX <= minX or bb->minX >= maxX) {
         return y;
     }
@@ -97,12 +97,12 @@ float AxisAlignedBB::calculateYOffset(const AxisAlignedBB *bb, float y) {
     }
 
     if(y > 0 and bb->maxY <= minY) {
-        float y1 = minY - bb->maxY;
+        double y1 = minY - bb->maxY;
         if(y1 < y) {
             y = y1;
         }
     } else if(y < 0 and bb->minY >= maxY) {
-        float y2 = maxY - bb->minY;
+        double y2 = maxY - bb->minY;
         if(y2 > y) {
             y = y2;
         }
@@ -111,7 +111,7 @@ float AxisAlignedBB::calculateYOffset(const AxisAlignedBB *bb, float y) {
     return y;
 }
 
-float AxisAlignedBB::calculateZOffset(const AxisAlignedBB *bb, float z) {
+double AxisAlignedBB::calculateZOffset(const AxisAlignedBB *bb, double z) {
     if(bb->maxX <= minX or bb->minX >= maxX) {
         return z;
     }
@@ -121,12 +121,12 @@ float AxisAlignedBB::calculateZOffset(const AxisAlignedBB *bb, float z) {
     }
 
     if(z > 0 and bb->maxZ <= minZ) {
-        float z1 = minZ - bb->maxZ;
+        double z1 = minZ - bb->maxZ;
         if(z1 < z) {
             z = z1;
         }
     } else if(z < 0 and bb->minZ >= maxZ) {
-        float z2 = maxZ - bb->minZ;
+        double z2 = maxZ - bb->minZ;
         if(z2 > z) {
             z = z2;
         }
@@ -135,7 +135,7 @@ float AxisAlignedBB::calculateZOffset(const AxisAlignedBB *bb, float z) {
     return z;
 }
 
-bool AxisAlignedBB::intersectsWith(const AxisAlignedBB *bb, float epsilon) {
+bool AxisAlignedBB::intersectsWith(const AxisAlignedBB *bb, double epsilon) {
     if(bb->maxX - minX > epsilon and maxX - bb->minX > epsilon) {
         if(bb->maxY - minY > epsilon and maxY - bb->minY > epsilon) {
             return bb->maxZ - minZ > epsilon and maxZ - bb->minZ > epsilon;
