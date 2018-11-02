@@ -4,6 +4,23 @@
  */
 
 namespace pocketmine\math {
+class Bearing{
+	public const SOUTH = 0;
+	public const WEST = 1;
+	public const NORTH = 2;
+	public const EAST = 3;
+
+	public static function toFacing(int $bearing) : int{}
+
+	public static function fromFacing(int $facing) : int{}
+
+	public static function fromAngle(float $angle) : int{}
+
+	public static function rotate(int $bearing, int $step) : int{}
+
+	public static function opposite(int $bearing) : int{}
+}
+
 class Facing{
 	public const AXIS_Y = 0;
 	public const AXIS_Z = 1;

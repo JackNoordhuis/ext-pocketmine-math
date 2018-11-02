@@ -6,7 +6,8 @@
 #include "config.h"
 #endif
 
-#include "src/PhpFacing.h";
+#include "src/PhpBearing.h"
+#include "src/PhpFacing.h"
 
 extern "C" {
 #include "php.h"
@@ -19,6 +20,7 @@ extern "C" {
 PHP_MINIT_FUNCTION(pocketmine_math)
 {
     // register php things
+    register_bearing_class();
     register_facing_class();
     return SUCCESS;
 }

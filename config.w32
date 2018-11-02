@@ -8,7 +8,7 @@ if (PHP_POCKETMINE_MATH != "no") {
 	ADD_FLAG("CFLAGS_POCKETMINE_MATH", "/EHsc");
 	ADD_SOURCES(
 		configure_module_dirname + "/src",
-		"PhpFacing.cpp",
+		"PhpFacing.cpp PhpBearing.cpp",
 		"pocketmine_math"
 	);
 	ADD_SOURCES(
