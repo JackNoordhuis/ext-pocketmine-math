@@ -112,20 +112,17 @@ PHP_METHOD(PhpBearing, opposite) {
     RETURN_LONG(Bearing::opposite(bearing));
 }
 
-zend_function_entry bearing_class_methods[] = {
-        PHP_ME(PhpBearing, toFacing, arginfo_Bearing_toFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-        PHP_ME(PhpBearing, fromFacing, arginfo_Bearing_fromFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-        PHP_ME(PhpBearing, fromAngle, arginfo_Bearing_fromAngle, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-        PHP_ME(PhpBearing, rotate, arginfo_Bearing_rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-        PHP_ME(PhpBearing, opposite, arginfo_Bearing_opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-        PHP_FE_END
-};
-
 void register_bearing_class() {
-    zend_class_entry ce;
-    INIT_CLASS_ENTRY(ce, "pocketmine\\math\\Bearing", bearing_class_methods);
+    zend_function_entry methods[] = {
+            PHP_ME(PhpBearing, toFacing, arginfo_Bearing_toFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+            PHP_ME(PhpBearing, fromFacing, arginfo_Bearing_fromFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+            PHP_ME(PhpBearing, fromAngle, arginfo_Bearing_fromAngle, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+            PHP_ME(PhpBearing, rotate, arginfo_Bearing_rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+            PHP_ME(PhpBearing, opposite, arginfo_Bearing_opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+            PHP_FE_END
+    };
 
-    bearing_entry = zend_register_internal_class(&ce);
+    REGISTER_CLASS_SET_ENTRY(Bearing, "pocketmine\\math\\Bearing", methods, bearing_entry);
 
     REGISTER_CLASS_CONST_LONG(bearing_entry, "SOUTH", Bearing::SOUTH);
     REGISTER_CLASS_CONST_LONG(bearing_entry, "WEST", Bearing::WEST);

@@ -111,20 +111,17 @@ PHP_METHOD(PhpFacing, validate) {
     }
 }
 
-zend_function_entry facing_class_methods[] = {
-    PHP_ME(PhpFacing, axis, arginfo_Facing_axis, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(PhpFacing, isPositive, arginfo_Facing_isPositive, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(PhpFacing, opposite, arginfo_Facing_opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(PhpFacing, rotate, arginfo_Facing_rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(PhpFacing, validate, arginfo_Facing_validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_FE_END
-};
-
 void register_facing_class() {
-    zend_class_entry ce;
-    INIT_CLASS_ENTRY(ce, "pocketmine\\math\\Facing", facing_class_methods);
+    zend_function_entry methods[] = {
+        PHP_ME(PhpFacing, axis, arginfo_Facing_axis, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+        PHP_ME(PhpFacing, isPositive, arginfo_Facing_isPositive, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+        PHP_ME(PhpFacing, opposite, arginfo_Facing_opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+        PHP_ME(PhpFacing, rotate, arginfo_Facing_rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+        PHP_ME(PhpFacing, validate, arginfo_Facing_validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+        PHP_FE_END
+    };
 
-    facing_entry = zend_register_internal_class(&ce);
+    REGISTER_CLASS_SET_ENTRY(Facing, "pocketmine\\math\\Facing", methods, facing_entry);
 
     REGISTER_CLASS_CONST_LONG(facing_entry, "AXIS_Y", Facing::AXIS_Y);
     REGISTER_CLASS_CONST_LONG(facing_entry, "AXIS_Z", Facing::AXIS_Z);
