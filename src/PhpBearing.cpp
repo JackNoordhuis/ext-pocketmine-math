@@ -127,8 +127,8 @@ void register_bearing_class() {
 
     bearing_entry = zend_register_internal_class(&ce);
 
-    zend_declare_class_constant_long(bearing_entry, "SOUTH", sizeof("SOUTH")-1, Bearing::SOUTH);
-    zend_declare_class_constant_long(bearing_entry, "WEST", sizeof("WEST")-1, Bearing::WEST);
-    zend_declare_class_constant_long(bearing_entry, "NORTH", sizeof("NORTH")-1, Bearing::NORTH);
-    zend_declare_class_constant_long(bearing_entry, "EAST", sizeof("EAST")-1, Bearing::EAST);
+    REGISTER_CLASS_CONST_LONG(bearing_entry, "SOUTH", Bearing::SOUTH);
+    REGISTER_CLASS_CONST_LONG(bearing_entry, "WEST", Bearing::WEST);
+    REGISTER_CLASS_CONST_LONG(bearing_entry, "NORTH", Bearing::NORTH);
+    REGISTER_CLASS_CONST_LONG(bearing_entry, "EAST", Bearing::EAST);
 }

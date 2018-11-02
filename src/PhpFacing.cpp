@@ -126,42 +126,19 @@ void register_facing_class() {
 
     facing_entry = zend_register_internal_class(&ce);
 
-    zend_declare_class_constant_long(facing_entry, "AXIS_Y", sizeof("AXIS_Y")-1, Facing::AXIS_Y);
-    zend_declare_class_constant_long(facing_entry, "AXIS_Z", sizeof("AXIS_Z")-1, Facing::AXIS_Z);
-    zend_declare_class_constant_long(facing_entry, "AXIS_X", sizeof("AXIS_X")-1, Facing::AXIS_X);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "AXIS_Y", Facing::AXIS_Y);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "AXIS_Z", Facing::AXIS_Z);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "AXIS_X", Facing::AXIS_X);
 
-    zend_declare_class_constant_long(facing_entry, "FLAG_AXIS_POSITIVE", sizeof("FLAG_AXIS_POSITIVE")-1, Facing::FLAG_AXIS_POSITIVE);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "FLAG_AXIS_POSITIVE", Facing::FLAG_AXIS_POSITIVE);
 
-    zend_declare_class_constant_long(facing_entry, "DOWN", sizeof("DOWN")-1, Facing::DOWN);
-    zend_declare_class_constant_long(facing_entry, "UP", sizeof("UP")-1, Facing::UP);
-    zend_declare_class_constant_long(facing_entry, "NORTH", sizeof("NORTH")-1, Facing::NORTH);
-    zend_declare_class_constant_long(facing_entry, "SOUTH", sizeof("SOUTH")-1, Facing::SOUTH);
-    zend_declare_class_constant_long(facing_entry, "WEST", sizeof("WEST")-1, Facing::WEST);
-    zend_declare_class_constant_long(facing_entry, "EAST", sizeof("EAST")-1, Facing::EAST);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "DOWN", Facing::DOWN);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "UP", Facing::UP);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "NORTH", Facing::NORTH);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "SOUTH", Facing::SOUTH);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "WEST", Facing::WEST);
+    REGISTER_CLASS_CONST_LONG(facing_entry, "EAST", Facing::EAST);
 
-    HashTable *all_ht;
-    ALLOC_HASHTABLE(all_ht);
-    zend_hash_init(all_ht, 6, NULL, NULL, 0);
-    for(int i = 0; i < 6; ++i) {
-        zval val;
-        ZVAL_LONG(&val, Facing::ALL[i]);
-        zend_hash_index_update(all_ht, i, &val);
-    }
-
-    zval all_arr;
-    ZVAL_ARR(&all_arr, all_ht);
-    zend_declare_class_constant(facing_entry, "ALL", sizeof("ALL")-1, &all_arr);
-
-    HashTable *horizontal_ht;
-    ALLOC_HASHTABLE(horizontal_ht);
-    zend_hash_init(horizontal_ht, 4, NULL, NULL, 0);
-    for(int i = 0; i < 4; ++i) {
-        zval val;
-        ZVAL_LONG(&val, Facing::HORIZONTAL[i]);
-        zend_hash_index_update(horizontal_ht, i, &val);
-    }
-
-    zval horizontal_arr;
-    ZVAL_ARR(&horizontal_arr, horizontal_ht);
-    zend_declare_class_constant(facing_entry, "HORIZONTAL", sizeof("HORIZONTAL")-1, &horizontal_arr);
+    REGISTER_CLASS_CONST_LONG_ARRAY(facing_entry, "ALL", Facing::ALL);
+    REGISTER_CLASS_CONST_LONG_ARRAY(facing_entry, "HORIZONTAL", Facing::HORIZONTAL);
 }
