@@ -57,4 +57,49 @@ class Facing{
 
 	public static function validate(int $facing) : void{}
 }
+
+class Vector2{
+	public $x;
+	public $y;
+
+	public function __construct(float $x = null, float $y = null){}
+
+	public function getX() : float{}
+
+	public function getY() : float{}
+
+	public function getFloorX() : int{}
+
+	public function getFloorY() : int{}
+
+	public function add($x, float $y = null) : \pocketmine\math\Vector2{}
+
+	public function subtract($x, float $y = null) : \pocketmine\math\Vector2{}
+
+	public function ceil() : \pocketmine\math\Vector2{}
+
+	public function floor() : \pocketmine\math\Vector2{}
+
+	public function round() : \pocketmine\math\Vector2{}
+
+	public function abs() : \pocketmine\math\Vector2{}
+
+	public function multiply(float $number) : \pocketmine\math\Vector2{}
+
+	public function divide(float $number) : \pocketmine\math\Vector2{}
+
+	public function distance($x, float $y = null) : float{}
+
+	public function distanceSquared($x, float $y = null) : float{}
+
+	public function length() : float{}
+
+	public function lengthSquared() : float{}
+
+	public function normalize() : float{}
+
+	public function dot(\pocketmine\math\Vector2 $v) : float{}
+
+	public function __toString() : string{}
+}
 }
