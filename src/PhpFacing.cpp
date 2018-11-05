@@ -17,15 +17,21 @@ extern "C" {
 #include "ext/spl/spl_exceptions.h"
 }
 
+// Defines so we can use our macros in ZendUtil.h.
+#define CLASS_TYPE Facing
+#define CLASS_NAME M_CONC(Php, CLASS_TYPE)
+#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_TYPE, _))
+
+
 /* PHP-Land Facing class */
 
-PHP_CLASS_ENTRY(PhpFacing);
+PHP_CLASS_ENTRY();
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_axis, 0, 1, IS_LONG, 0)
     ZEND_ARG_TYPE_INFO(0, direction, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpFacing, axis, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(axis, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -39,7 +45,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_isPositive, 0, 1, _IS_BOO
     ZEND_ARG_TYPE_INFO(0, direction, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpFacing, isPositive, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(isPositive, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -53,7 +59,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_opposite, 0, 1, IS_LONG, 
     ZEND_ARG_TYPE_INFO(0, direction, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpFacing, opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -69,7 +75,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_rotate, 0, 3, IS_LONG, 0)
     ZEND_ARG_TYPE_INFO(0, clockwise, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpFacing, rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
     zend_long axis = NULL;
     zend_bool clockwise = NULL;
@@ -96,7 +102,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Facing_validate, IS_VOID, 0)
     ZEND_ARG_TYPE_INFO(0, facing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpFacing, validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long facing = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -113,28 +119,33 @@ PHP_CLASS_METHOD(PhpFacing, validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
 
 void register_facing_class() {
     REGISTER_FUNCTION_ENTRY_START()
-        REGISTER_FUNCTION_ENTRY(PhpFacing, axis, arginfo_Facing_axis)
-        REGISTER_FUNCTION_ENTRY(PhpFacing, isPositive, arginfo_Facing_isPositive)
-        REGISTER_FUNCTION_ENTRY(PhpFacing, opposite, arginfo_Facing_opposite)
-        REGISTER_FUNCTION_ENTRY(PhpFacing, rotate, arginfo_Facing_rotate)
-        REGISTER_FUNCTION_ENTRY(PhpFacing, validate, arginfo_Facing_validate)
+        REGISTER_FUNCTION_ENTRY(axis)
+        REGISTER_FUNCTION_ENTRY(isPositive)
+        REGISTER_FUNCTION_ENTRY(opposite)
+        REGISTER_FUNCTION_ENTRY(rotate)
+        REGISTER_FUNCTION_ENTRY(validate)
     REGISTER_FUNCTION_ENTRY_END();
 
-    REGISTER_CLASS_SET_ENTRY(Facing, "pocketmine\\math\\Facing", PhpFacing);
+    REGISTER_CLASS_SET_ENTRY("pocketmine\\math\\Facing");
 
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "AXIS_Y", Facing::AXIS_Y);
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "AXIS_Z", Facing::AXIS_Z);
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "AXIS_X", Facing::AXIS_X);
+    REGISTER_CLASS_CONST_LONG("AXIS_Y", Facing::AXIS_Y);
+    REGISTER_CLASS_CONST_LONG("AXIS_Z", Facing::AXIS_Z);
+    REGISTER_CLASS_CONST_LONG("AXIS_X", Facing::AXIS_X);
 
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "FLAG_AXIS_POSITIVE", Facing::FLAG_AXIS_POSITIVE);
+    REGISTER_CLASS_CONST_LONG("FLAG_AXIS_POSITIVE", Facing::FLAG_AXIS_POSITIVE);
 
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "DOWN", Facing::DOWN);
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "UP", Facing::UP);
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "NORTH", Facing::NORTH);
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "SOUTH", Facing::SOUTH);
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "WEST", Facing::WEST);
-    REGISTER_CLASS_CONST_LONG(PhpFacing_entry, "EAST", Facing::EAST);
+    REGISTER_CLASS_CONST_LONG("DOWN", Facing::DOWN);
+    REGISTER_CLASS_CONST_LONG("UP", Facing::UP);
+    REGISTER_CLASS_CONST_LONG("NORTH", Facing::NORTH);
+    REGISTER_CLASS_CONST_LONG("SOUTH", Facing::SOUTH);
+    REGISTER_CLASS_CONST_LONG("WEST", Facing::WEST);
+    REGISTER_CLASS_CONST_LONG("EAST", Facing::EAST);
 
-    REGISTER_CLASS_CONST_LONG_ARRAY(PhpFacing_entry, "ALL", Facing::ALL);
-    REGISTER_CLASS_CONST_LONG_ARRAY(PhpFacing_entry, "HORIZONTAL", Facing::HORIZONTAL);
+    REGISTER_CLASS_CONST_LONG_ARRAY("ALL", Facing::ALL);
+    REGISTER_CLASS_CONST_LONG_ARRAY("HORIZONTAL", Facing::HORIZONTAL);
 }
+
+// Undefine so we can use the macros for other classes.
+#undef CLASS_TYPE
+#undef CLASS_NAME
+#undef ARG_INFO_PREFIX

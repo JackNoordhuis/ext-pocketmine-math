@@ -17,15 +17,21 @@ extern "C" {
 #include "ext/spl/spl_exceptions.h"
 }
 
+// Defines so we can use our macros in ZendUtil.h.
+#define CLASS_TYPE Bearing
+#define CLASS_NAME M_CONC(Php, CLASS_TYPE)
+#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_TYPE, _))
+
+
 /* PHP-Land Bearing class */
 
-PHP_CLASS_ENTRY(PhpBearing);
+PHP_CLASS_ENTRY();
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_toFacing, 0, 1, IS_LONG, 0)
     ZEND_ARG_TYPE_INFO(0, bearing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpBearing, toFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(toFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long bearing = NULL;
 
     int result;
@@ -48,7 +54,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_fromFacing, 0, 1, IS_LON
     ZEND_ARG_TYPE_INFO(0, facing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpBearing, fromFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(fromFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long facing = NULL;
 
     int result;
@@ -71,8 +77,8 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_fromAngle, 0, 1, IS_LONG
     ZEND_ARG_TYPE_INFO(0, angle, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpBearing, fromAngle, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
-    double angle = NULL;
+PHP_CLASS_METHOD(fromAngle, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+    double angle = 0;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
         Z_PARAM_DOUBLE(angle)
@@ -86,7 +92,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_rotate, 0, 2, IS_LONG, 0
     ZEND_ARG_TYPE_INFO(0, step, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpBearing, rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long bearing = NULL;
     zend_long step = NULL;
 
@@ -102,7 +108,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Bearing_opposite, IS_LONG, 0)
     ZEND_ARG_TYPE_INFO(0, bearing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(PhpBearing, opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD(opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long bearing = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -114,17 +120,22 @@ PHP_CLASS_METHOD(PhpBearing, opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
 
 void register_bearing_class() {
     REGISTER_FUNCTION_ENTRY_START()
-        REGISTER_FUNCTION_ENTRY(PhpBearing, toFacing, arginfo_Bearing_toFacing)
-        REGISTER_FUNCTION_ENTRY(PhpBearing, fromFacing, arginfo_Bearing_fromFacing)
-        REGISTER_FUNCTION_ENTRY(PhpBearing, fromAngle, arginfo_Bearing_fromAngle)
-        REGISTER_FUNCTION_ENTRY(PhpBearing, rotate, arginfo_Bearing_rotate)
-        REGISTER_FUNCTION_ENTRY(PhpBearing, opposite, arginfo_Bearing_opposite)
+        REGISTER_FUNCTION_ENTRY(toFacing)
+        REGISTER_FUNCTION_ENTRY(fromFacing)
+        REGISTER_FUNCTION_ENTRY(fromAngle)
+        REGISTER_FUNCTION_ENTRY(rotate)
+        REGISTER_FUNCTION_ENTRY(opposite)
     REGISTER_FUNCTION_ENTRY_END();
 
-    REGISTER_CLASS_SET_ENTRY(Bearing, "pocketmine\\math\\Bearing", PhpBearing);
+    REGISTER_CLASS_SET_ENTRY("pocketmine\\math\\Bearing");
 
-    REGISTER_CLASS_CONST_LONG(PhpBearing_entry, "SOUTH", Bearing::SOUTH);
-    REGISTER_CLASS_CONST_LONG(PhpBearing_entry, "WEST", Bearing::WEST);
-    REGISTER_CLASS_CONST_LONG(PhpBearing_entry, "NORTH", Bearing::NORTH);
-    REGISTER_CLASS_CONST_LONG(PhpBearing_entry, "EAST", Bearing::EAST);
+    REGISTER_CLASS_CONST_LONG("SOUTH", Bearing::SOUTH);
+    REGISTER_CLASS_CONST_LONG("WEST", Bearing::WEST);
+    REGISTER_CLASS_CONST_LONG("NORTH", Bearing::NORTH);
+    REGISTER_CLASS_CONST_LONG("EAST", Bearing::EAST);
 }
+
+// Undefine so we can use the macros for other classes.
+#undef CLASS_TYPE
+#undef CLASS_NAME
+#undef ARG_INFO_PREFIX

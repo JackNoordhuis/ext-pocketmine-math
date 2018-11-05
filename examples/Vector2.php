@@ -14,10 +14,8 @@ echo $vec->getY() . PHP_EOL;
 echo $vec->getFloorX() . PHP_EOL;
 echo $vec->getFloorY() . PHP_EOL;
 
-echo $vec->add(0.5, 0.5);
+echo $vec->add(0.5, 0.5) . PHP_EOL;
 echo $vec->subtract(0.5, 0.5) . PHP_EOL;
-
-$vec = new \pocketmine\math\Vector2(mt_rand(-100, 100), mt_rand(-100, 100));
 
 echo $vec->ceil() . PHP_EOL;
 echo $vec->floor() . PHP_EOL;
