@@ -8,6 +8,7 @@
 
 #include "src/PhpBearing.h"
 #include "src/PhpFacing.h"
+#include "src/PhpMath.h"
 #include "src/PhpVector2.h"
 
 extern "C" {
@@ -23,6 +24,7 @@ PHP_MINIT_FUNCTION(pocketmine_math)
     // register php things
     register_bearing_class();
     register_facing_class();
+    register_math_class();
     register_vector2_class();
 
     return SUCCESS;

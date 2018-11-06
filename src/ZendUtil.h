@@ -249,7 +249,7 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
     ALLOC_HASHTABLE(ht); \
     int value_len = sizeof(value)/sizeof(value[0]); \
     zend_hash_init(ht, value_len, NULL, NULL, 0); \
-        for(int i = 0; i < value_len; ++i) { \
+    for(int i = 0; i < value_len; ++i) { \
         zval val; \
         ZVAL_LONG(&val, value[i]); \
         zend_hash_index_update(ht, i, &val); \

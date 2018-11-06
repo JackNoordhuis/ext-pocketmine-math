@@ -58,6 +58,15 @@ class Facing{
 	public static function validate(int $facing) : void{}
 }
 
+class Math{
+
+	public static function floorFloat(float $n) : int{}
+
+	public static function ceilFloat(float $n) : int{}
+
+	public static function solveQuadratic(float $a, float $b, float $c) : array{}
+}
+
 class Vector2{
 	public $x;
 	public $y;
