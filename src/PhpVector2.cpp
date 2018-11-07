@@ -356,7 +356,7 @@ PHP_CLASS_METHOD(lengthSquared, ZEND_ACC_PUBLIC) {
     RETURN_DOUBLE(container->lengthSquared());
 }
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_normalize, IS_DOUBLE, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_Vector2_normalize, 0, 0, pocketmine\\math\\Vector2, 0)
 ZEND_END_ARG_INFO()
 
 PHP_CLASS_METHOD(normalize, ZEND_ACC_PUBLIC) {
