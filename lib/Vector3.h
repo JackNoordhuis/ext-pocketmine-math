@@ -6,12 +6,11 @@
 #define EXT_POCKETMINE_MATH_VECTOR3_H
 
 #include "Math.h"
-#include "Facing.h"
 
 class Vector2 {
 public:
     double x, y;
-};
+}; // forward declare to avoid include
 
 class Vector3 {
 public:
@@ -37,17 +36,11 @@ public:
         return z;
     }
 
-    int getFloorX() {
-        return (int) std::floor(x);
-    }
+    int getFloorX();
 
-    int getFloorY() {
-        return (int) std::floor(y);
-    }
+    int getFloorY();
 
-    int getFloorZ() {
-        return (int) std::floor(z);
-    }
+    int getFloorZ();
 
     Vector3 *add(double x, double y, double z) {
         return new Vector3(this->x + x, this->y + y, this->z + z);
@@ -73,81 +66,39 @@ public:
         return new Vector3(x / number, y / number, z / number);
     }
 
-    Vector3 *ceil() {
-        return new Vector3((int) std::ceil(x), (int) std::ceil(y), (int) std::ceil(z));
-    }
+    Vector3 *ceil();
 
-    Vector3 *floor() {
-        return new Vector3((int) std::floor(x), (int) std::floor(y), (int) std::floor(z));
-    }
+    Vector3 *floor();
 
-    Vector3 *round(int precision = 0, int mode = POCKETMINE_MATH_ROUND_HALF_UP) {
-        if(precision > 0) {
-            return new Vector3(pocketmine_math_round(x, precision, mode), pocketmine_math_round(y, precision, mode), pocketmine_math_round(z, precision, mode));
-        }
-        return new Vector3((int) pocketmine_math_round(x, precision, mode), (int) pocketmine_math_round(y, precision, mode), (int) pocketmine_math_round(z, precision, mode));
-    }
+    Vector3 *round(int precision = 0, int mode = POCKETMINE_MATH_ROUND_HALF_UP);
 
-    Vector3 *abs() {
-        return new Vector3((int) std::abs(x), (int) std::abs(y), (int) std::abs(z));
-    }
+    Vector3 *abs();
 
     /**
      * @param side
      * @param step
      * @return
      */
-    Vector3 *getSide(int side, int step = 1) {
-        switch (side) {
-            case Facing::DOWN:
-                return new Vector3(x, y - step, z);
-            case Facing::UP:
-                return new Vector3(x, y + step, z);
-            case Facing::NORTH:
-                return new Vector3(x, y, z - step);
-            case Facing::SOUTH:
-                return new Vector3(x, y, z + step);
-            case Facing::WEST:
-                return new Vector3(x - step, y, z);
-            case Facing::EAST:
-                return new Vector3(x + step, y, z);
-            default:
-                return this;
-        }
-    }
+    Vector3 *getSide(int side, int step = 1);
 
-    Vector3 *down(int step = 1) {
-        return getSide(Facing::DOWN, step);
-    }
+    Vector3 *down(int step = 1);
 
-    Vector3 *up(int step = 1) {
-        return getSide(Facing::UP, step);
-    }
+    Vector3 *up(int step = 1);
 
-    Vector3 *north(int step = 1) {
-        return getSide(Facing::NORTH, step);
-    }
+    Vector3 *north(int step = 1);
 
-    Vector3 *south(int step = 1) {
-        return getSide(Facing::SOUTH, step);
-    }
+    Vector3 *south(int step = 1);
 
-    Vector3 *west(int step = 1) {
-        return getSide(Facing::WEST, step);
-    }
+    Vector3 *west(int step = 1);
 
-    Vector3 *east(int step = 1) {
-        return getSide(Facing::EAST, step);
-    }
+    Vector3 *east(int step = 1);
 
     /**
     * Yields vectors stepped out from this one in all directions.
     *
     * @param step
     */
-    void sides(int step = 1) {
-        //TODO: Return PHP Generator
-    }
+    void sides(int step = 1);
 
     /**
      * Same as sides() but returns a pre-populated array instead of Generator.
@@ -155,9 +106,7 @@ public:
      * @param keys
      * @param step
      */
-    void sidesArray(bool keys = false, int step = 1) {
-        //TODO: Convert generator output to array
-    }
+    void sidesArray(bool keys = false, int step = 1);
 
     /**
      * Yields vectors stepped out from this one in directions except those on the given axis.
@@ -165,9 +114,7 @@ public:
      * @param axis Facing directions on this axis will be excluded
      * @param step
      */
-    void sidesAroundAxis(int axis, int step = 1) {
-        //TODO: Return PHP Generator
-    }
+    void sidesAroundAxis(int axis, int step = 1);
 
     /**
      * Return a Vector3 instance.
@@ -182,26 +129,20 @@ public:
      * @param vector
      * @return
      */
-    double distance(const Vector3 *vector) {
-        return sqrt(distanceSquared(vector));
-    }
+    double distance(const Vector3 *vector);
 
     /**
      * @param vector
      * @return
      */
-    double distanceSquared(const Vector3 *vector) {
-        return pow(x - vector->x, 2) + pow(y - vector->y, 2) + pow(z - vector->z, 2);
-    }
+    double distanceSquared(const Vector3 *vector);
 
     /**
      * @param x
      * @param z
      * @return
      */
-    double maxPlainDistance(double x, double z) {
-        return fmax(::abs(this->x - x), ::abs(this->z - z));
-    }
+    double maxPlainDistance(double x, double z);
 
     /**
      * @param vector
@@ -222,9 +163,7 @@ public:
     /**
      * @return
      */
-    double length() {
-        return sqrt(lengthSquared());
-    }
+    double length();
 
     /**
      * @return
@@ -236,14 +175,7 @@ public:
     /**
      * @return
      */
-    Vector3 *normalize() {
-        double length = lengthSquared();
-        if(length > 0) {
-            return divide(sqrt(length));
-        }
-
-        return new Vector3();
-    }
+    Vector3 *normalize();
 
     /**
      * @param v

@@ -13,7 +13,7 @@ if (PHP_POCKETMINE_MATH != "no") {
 	);
 	ADD_SOURCES(
 		configure_module_dirname + "/lib",
-		"AxisAlignedBB.cpp Bearing.cpp Facing.cpp",
+		"AxisAlignedBB.cpp Bearing.cpp Facing.cpp Math.cpp Vector2.cpp Vector3.cpp VectorMath.cpp VoxelRayTrace.cpp",
 		"pocketmine_math"
 	);
 }

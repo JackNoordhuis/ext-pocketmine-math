@@ -5,13 +5,11 @@
 #ifndef EXT_POCKETMINE_MATH_VECTORMATH_H
 #define EXT_POCKETMINE_MATH_VECTORMATH_H
 
-#include "Vector2.h"
+class Vector2; // forward declare to avoid include
 
 class VectorMath {
 public:
-    static Vector2 *getDirection2D(double azimuth) {
-        return new Vector2(cos(azimuth), sin(azimuth));
-    }
+    static Vector2 *getDirection2D(double azimuth);
 };
 
 #endif //EXT_POCKETMINE_MATH_VECTORMATH_H

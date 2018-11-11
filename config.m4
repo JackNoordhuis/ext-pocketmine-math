@@ -11,7 +11,7 @@ if test "$PHP_POCKETMINE_MATH" != "no"; then
   PHP_ADD_LIBRARY(stdc++, 1, POCKETMINE_MATH_SHARED_LIBADD)
   PHP_SUBST(SOCKET_SERVER_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(pocketmine_math, pocketmine_math.cpp lib/AxisAlignedBB.cpp lib/Bearing.cpp lib/Facing.cpp src/PhpBearing.cpp src/PhpFacing.cpp src/PhpMath.cpp src/PhpVector2.cpp, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -std=c++11)
+  PHP_NEW_EXTENSION(pocketmine_math, pocketmine_math.cpp lib/AxisAlignedBB.cpp lib/Bearing.cpp lib/Facing.cpp lib/Math.cpp lib/Vector2.cpp lib/Vector3.cpp lib/VectorMath.cpp lib/VoxelRayTrace.cpp src/PhpBearing.cpp src/PhpFacing.cpp src/PhpMath.cpp src/PhpVector2.cpp, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -std=c++11)
   PHP_ADD_BUILD_DIR($ext_builddir/src, 1)
   PHP_ADD_BUILD_DIR($ext_builddir/lib, 1)
   PHP_ADD_INCLUDE($ext_builddir)

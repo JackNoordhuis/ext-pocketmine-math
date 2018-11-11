@@ -5,7 +5,7 @@
 #ifndef EXT_POCKETMINE_MATH_VOXELRAYTRACE_H
 #define EXT_POCKETMINE_MATH_VOXELRAYTRACE_H
 
-#include "Vector3.h"
+class Vector3; // forward declare to avoid include
 
 class VoxelRayTrace {
 private:
@@ -24,22 +24,7 @@ private:
      *
      * @return Distance along the ray trace that must be travelled to cross a boundary.
      */
-    static double *rayTraceDistanceToBoundry(double s, double ds) {
-        if(ds == 0) {
-            return nullptr;
-        }
-
-        if(ds < 0) {
-            s = -s;
-            ds = -ds;
-
-            if(floor(s) == s) { // exactly at coordinate, will leave the coordinate immediately by moving negatively
-                return new double(0);
-            }
-        }
-
-        return new double(1 - (s - floor(s)) / ds);
-    }
+    static double *rayTraceDistanceToBoundry(double s, double ds);
 
 public:
 
@@ -51,9 +36,7 @@ public:
      * @param directionViewer
      * @param maxDistance
      */
-    static void inDirection(const Vector3 *start, const Vector3 *directionViewer, double maxDistance) {
-        //TODO: Return PHP Generator
-    }
+    static void inDirection(const Vector3 *start, const Vector3 *directionViewer, double maxDistance);
 
     /**
      * Performs a ray trace between the start and end coordinates. This returns a Generator which yields Vector3s
@@ -62,9 +45,7 @@ public:
      * @param start
      * @param end
      */
-    static void betweenPoints(const Vector3 *start, const Vector3 *end) {
-        //TODO: Return PHP Generator
-    }
+    static void betweenPoints(const Vector3 *start, const Vector3 *end);
 };
 
 #endif //EXT_POCKETMINE_MATH_VOXELRAYTRACE_H

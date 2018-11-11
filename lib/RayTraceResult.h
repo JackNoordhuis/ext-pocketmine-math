@@ -5,7 +5,8 @@
 #ifndef EXT_POCKETMINE_MATH_RAYTRACERESULT_H
 #define EXT_POCKETMINE_MATH_RAYTRACERESULT_H
 
-#include "AxisAlignedBB.h"
+class AxisAlignedBB; // forward declare to avoid include
+class Vector3; // forward declare to avoid include
 
 /**
  * Class representing a ray trace collision with an AxisAlignedBB

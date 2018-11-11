@@ -6,8 +6,6 @@
 #define EXT_POCKETMINE_MATH_MATRIX_H
 
 #include <map>
-#include <stdexcept>
-#include <string>
 
 class Matrix {
 private:
