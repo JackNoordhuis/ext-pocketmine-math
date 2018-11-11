@@ -4,20 +4,12 @@
 
 #include "PhpVector2.h"
 
-#include "ZendUtil.h"
-
 #include "lib/Vector2.h"
 
 #include <string>
 
-extern "C" {
-#include "php.h"
-}
-
 // Defines so we can use our macros in ZendUtil.h.
 #define CLASS_TYPE Vector2
-#define CLASS_NAME M_CONC(Php, CLASS_TYPE)
-#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_TYPE, _))
 
 
 /* PHP-Land Vector2 class */
@@ -29,7 +21,7 @@ ZEND_BEGIN_ARG_INFO_EX(ARG_INFO_NAME(__construct), 0, 0, 0)
     ZEND_ARG_TYPE_INFO(0, y, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(__construct, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR) {
+PHP_CLASS_METHOD_EX(__construct, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR) {
     double x = 0;
     double y = 0;
 
@@ -51,7 +43,7 @@ PHP_CLASS_METHOD(__construct, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR) {
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_getX, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(getX, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(getX, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     RETURN_DOUBLE(FETCH_PHP_OBJECT_CONTAINER()->getX());
@@ -60,7 +52,7 @@ PHP_CLASS_METHOD(getX, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_getY, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(getY, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(getY, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     RETURN_DOUBLE(FETCH_PHP_OBJECT_CONTAINER()->getY());
@@ -69,7 +61,7 @@ PHP_CLASS_METHOD(getY, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_getFloorX, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(getFloorX, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(getFloorX, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     RETURN_LONG(FETCH_PHP_OBJECT_CONTAINER()->getFloorX());
@@ -78,7 +70,7 @@ PHP_CLASS_METHOD(getFloorX, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_getFloorY, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(getFloorY, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(getFloorY, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     RETURN_LONG(FETCH_PHP_OBJECT_CONTAINER()->getFloorY());
@@ -89,7 +81,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_Vector2_add, 0, 1, pocketmine\\ma
     ZEND_ARG_TYPE_INFO(0, y, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(add, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(add, ZEND_ACC_PUBLIC) {
     zval *x = nullptr;
     double y = 0;
 
@@ -126,7 +118,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_Vector2_subtract, 0, 1, pocketmin
     ZEND_ARG_TYPE_INFO(0, y, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(subtract, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(subtract, ZEND_ACC_PUBLIC) {
     zval *x = nullptr;
     double y = 0;
 
@@ -161,7 +153,7 @@ PHP_CLASS_METHOD(subtract, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO(arginfo_Vector2_ceil, pocketmine\\math\\Vector2, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(ceil, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(ceil, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -178,7 +170,7 @@ PHP_CLASS_METHOD(ceil, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO(arginfo_Vector2_floor, pocketmine\\math\\Vector2, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(floor, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(floor, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -195,7 +187,7 @@ PHP_CLASS_METHOD(floor, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO(arginfo_Vector2_round, pocketmine\\math\\Vector2, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(round, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(round, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -212,7 +204,7 @@ PHP_CLASS_METHOD(round, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO(arginfo_Vector2_abs, pocketmine\\math\\Vector2, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(abs, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(abs, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -230,7 +222,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_Vector2_multiply, 0, 1, pocketmin
     ZEND_ARG_TYPE_INFO(0, number, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(multiply, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(multiply, ZEND_ACC_PUBLIC) {
     double number = 0;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -252,7 +244,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_Vector2_divide, 0, 1, pocketmine\
     ZEND_ARG_TYPE_INFO(0, number, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(divide, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(divide, ZEND_ACC_PUBLIC) {
     double number = 0;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -275,7 +267,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Vector2_distance, 0, 1, IS_DOUBL
     ZEND_ARG_TYPE_INFO(0, y, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(distance, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(distance, ZEND_ACC_PUBLIC) {
     zval *x = nullptr;
     double y = 0;
 
@@ -307,7 +299,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Vector2_distanceSquared, 0, 1, I
     ZEND_ARG_TYPE_INFO(0, y, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(distanceSquared, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(distanceSquared, ZEND_ACC_PUBLIC) {
     zval *x = nullptr;
     double y = 0;
 
@@ -337,7 +329,7 @@ PHP_CLASS_METHOD(distanceSquared, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_length, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(length, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(length, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -348,7 +340,7 @@ PHP_CLASS_METHOD(length, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_lengthSquared, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(lengthSquared, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(lengthSquared, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -359,7 +351,7 @@ PHP_CLASS_METHOD(lengthSquared, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_Vector2_normalize, 0, 0, pocketmine\\math\\Vector2, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(normalize, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(normalize, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -374,7 +366,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2_dot, IS_DOUBLE, 0)
     ZEND_ARG_OBJ_INFO(0, v, pocketmine\\math\\Vector2, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(dot, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(dot, ZEND_ACC_PUBLIC) {
     zval *v;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 2)
@@ -390,7 +382,7 @@ PHP_CLASS_METHOD(dot, ZEND_ACC_PUBLIC) {
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Vector2___toString, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(__toString, ZEND_ACC_PUBLIC) {
+PHP_CLASS_METHOD_EX(__toString, ZEND_ACC_PUBLIC) {
     zend_parse_parameters_none_throw();
 
     FETCH_PHP_OBJECT_CONTAINER_VAR(container);
@@ -430,5 +422,3 @@ void register_vector2_class() {
 
 // Undefine so we can use the macros for other classes.
 #undef CLASS_TYPE
-#undef CLASS_NAME
-#undef ARG_INFO_PREFIX

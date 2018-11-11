@@ -5,12 +5,12 @@
 #ifndef EXT_POCKETMINE_MATH_ZENDUTIL_H
 #define EXT_POCKETMINE_MATH_ZENDUTIL_H
 
-#include <vector>
-
 extern "C" {
 #include "php.h"
-#include "php_pocketmine_math.h"
 }
+
+#define CLASS_NAME M_CONC(Php, CLASS_TYPE)
+#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_TYPE, _))
 
 /**
  * A simple struct for keeping track of a zend classes flags.
@@ -157,10 +157,16 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
     M_CONC(ARG_INFO_PREFIX, name)
 
 /*
+ * Performs PHP_METHOD functionality without duplicating the class name.
+ */
+#define PHP_CLASS_METHOD(name) \
+    void ZEND_MN_CONC(CLASS_NAME, name)(INTERNAL_FUNCTION_PARAMETERS)
+
+/*
  * Performs PHP_METHOD functionality whilst keeping method flags in the same
  * area of code as method definition.
  */
-#define PHP_CLASS_METHOD(name, flags) \
+#define PHP_CLASS_METHOD_EX(name, flags) \
     php_class_method_definition M_CONC(php_, M_CONC(CLASS_NAME, _##name##_method)) = { flags }; \
     void ZEND_MN_CONC(CLASS_NAME, name)(INTERNAL_FUNCTION_PARAMETERS)
 
@@ -284,6 +290,18 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
     REGISTER_CLASS_PROPERTY_DOUBLE_EX(name, acc_flags, NULL)
 
 /*
+* Define a php class property of type long with a default value.
+*/
+#define REGISTER_CLASS_PROPERTY_LONG_EX(name, acc_flags, default_value) \
+    zend_declare_property_long(M_CONC(CLASS_NAME, _entry), name, sizeof(name)-1, default_value, acc_flags)
+
+/*
+* Define a php class property of type long.
+*/
+#define REGISTER_CLASS_PROPERTY_LONG(name, acc_flags) \
+    REGISTER_CLASS_PROPERTY_LONG_EX(name, acc_flags, NULL)
+
+/*
  * Update a php class property.
  */
 #define UPDATE_CLASS_PROPERTY_OTHER(obj, name, new_value) \
@@ -307,18 +325,36 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
 #define UPDATE_CLASS_PROPERTY_DOUBLE(name, new_value) \
     UPDATE_CLASS_PROPERTY_DOUBLE_OTHER(getThis(), name, new_value)
 
+/*
+* Update a php class property of type long.
+*/
+#define UPDATE_CLASS_PROPERTY_LONG_OTHER(obj, name, new_value) \
+    zend_update_property_long(M_CONC(CLASS_NAME, _entry), obj, name, sizeof(name)-1, new_value)
+
+/*
+* Update a php class property on the current object of type long.
+*/
+#define UPDATE_CLASS_PROPERTY_LONG(name, new_value) \
+    UPDATE_CLASS_PROPERTY_LONG_OTHER(getThis(), name, new_value)
+
 
 // Helper macros for dealing with C++ objects encapsulated in a class_obj struct.
+
+/*
+ * Retrieve a class_obj struct of a custom type from a zval pointer.
+ */
+#define FETCH_PHP_OBJECT_OTHER_EX(type, obj) \
+    fetch_from_zend_object<type>(Z_OBJ_P(obj))
 
 /*
  * Retrieve a class_obj struct from a zval pointer.
  */
 #define FETCH_PHP_OBJECT_OTHER(obj) \
-    fetch_from_zend_object<CLASS_TYPE>(Z_OBJ_P(obj))
+    FETCH_PHP_OBJECT_OTHER_EX(CLASS_TYPE, obj)
 
 /*
-* Retrieve a class_obj struct from the current class.
-*/
+ * Retrieve a class_obj struct from the current class.
+ */
 #define FETCH_PHP_OBJECT() \
     FETCH_PHP_OBJECT_OTHER(getThis())
 
@@ -335,16 +371,34 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
     auto var = FETCH_PHP_OBJECT_OTHER(obj_p)
 
 /*
+ * Retrieve a class_obj struct of a custom type from a zval pointer and store in the variable var.
+ */
+#define FETCH_PHP_OBJECT_VAR_OTHER_EX(type, var, obj_p) \
+    auto var = FETCH_PHP_OBJECT_OTHER_EX(type, obj_p)
+
+/*
  * Retrieve a pointer to the C++ object from the current class.
  */
 #define FETCH_PHP_OBJECT_CONTAINER() \
     fetch_from_zend_object<CLASS_TYPE>(Z_OBJ_P(getThis()))->container
 
 /*
+ * Retrieve a pointer to the C++ object of a custom type from a zval pointer.
+ */
+#define FETCH_PHP_OBJECT_CONTAINER_OTHER_EX(type, obj_p) \
+    fetch_from_zend_object<type>(Z_OBJ_P(obj_p))->container
+
+/*
  * Retrieve a pointer to the C++ object from a zval pointer.
  */
 #define FETCH_PHP_OBJECT_CONTAINER_OTHER(obj_p) \
-    fetch_from_zend_object<CLASS_TYPE>(Z_OBJ_P(obj_p))->container
+    FETCH_PHP_OBJECT_CONTAINER_OTHER_EX(CLASS_TYPE, obj_p)
+
+/*
+ * Retrieve a pointer to the C++ object from a zval pointer and store in the variable var.
+ */
+#define FETCH_PHP_OBJECT_CONTAINER_VAR_OTHER_EX(type, var, obj_p) \
+    auto var = FETCH_PHP_OBJECT_CONTAINER_OTHER_EX(type, obj_p)
 
 /*
  * Retrieve a pointer to the C++ object from a zval pointer and store in the variable var.

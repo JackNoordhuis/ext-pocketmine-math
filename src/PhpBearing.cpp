@@ -4,23 +4,17 @@
 
 #include "PhpBearing.h"
 
-#include "ZendUtil.h"
-
 #include "lib/Bearing.h"
 
 #include <stdexcept>
-#include <string>
 
 extern "C" {
-#include "php.h"
 #include "Zend/zend_exceptions.h"
 #include "ext/spl/spl_exceptions.h"
 }
 
 // Defines so we can use our macros in ZendUtil.h.
 #define CLASS_TYPE Bearing
-#define CLASS_NAME M_CONC(Php, CLASS_TYPE)
-#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_TYPE, _))
 
 
 /* PHP-Land Bearing class */
@@ -31,7 +25,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_toFacing, 0, 1, IS_LONG,
     ZEND_ARG_TYPE_INFO(0, bearing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(toFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(toFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long bearing = NULL;
 
     int result;
@@ -54,7 +48,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_fromFacing, 0, 1, IS_LON
     ZEND_ARG_TYPE_INFO(0, facing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(fromFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(fromFacing, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long facing = NULL;
 
     int result;
@@ -77,7 +71,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_fromAngle, 0, 1, IS_LONG
     ZEND_ARG_TYPE_INFO(0, angle, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(fromAngle, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(fromAngle, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     double angle = 0;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -92,7 +86,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Bearing_rotate, 0, 2, IS_LONG, 0
     ZEND_ARG_TYPE_INFO(0, step, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long bearing = NULL;
     zend_long step = NULL;
 
@@ -108,7 +102,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Bearing_opposite, IS_LONG, 0)
     ZEND_ARG_TYPE_INFO(0, bearing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long bearing = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -137,5 +131,3 @@ void register_bearing_class() {
 
 // Undefine so we can use the macros for other classes.
 #undef CLASS_TYPE
-#undef CLASS_NAME
-#undef ARG_INFO_PREFIX

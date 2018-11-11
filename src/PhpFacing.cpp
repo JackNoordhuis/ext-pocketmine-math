@@ -4,24 +4,17 @@
 
 #include "PhpFacing.h"
 
-#include "ZendUtil.h"
-
 #include "lib/Facing.h"
 
 #include <stdexcept>
-#include <string>
 
 extern "C" {
-#include "php.h"
 #include "Zend/zend_exceptions.h"
 #include "ext/spl/spl_exceptions.h"
 }
 
 // Defines so we can use our macros in ZendUtil.h.
 #define CLASS_TYPE Facing
-#define CLASS_NAME M_CONC(Php, CLASS_TYPE)
-#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_TYPE, _))
-
 
 /* PHP-Land Facing class */
 
@@ -31,7 +24,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_axis, 0, 1, IS_LONG, 0)
     ZEND_ARG_TYPE_INFO(0, direction, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(axis, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(axis, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -45,7 +38,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_isPositive, 0, 1, _IS_BOO
     ZEND_ARG_TYPE_INFO(0, direction, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(isPositive, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(isPositive, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -59,7 +52,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_opposite, 0, 1, IS_LONG, 
     ZEND_ARG_TYPE_INFO(0, direction, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -75,7 +68,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_rotate, 0, 3, IS_LONG, 0)
     ZEND_ARG_TYPE_INFO(0, clockwise, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long direction = NULL;
     zend_long axis = NULL;
     zend_bool clockwise = NULL;
@@ -102,7 +95,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO(arginfo_Facing_validate, IS_VOID, 0)
     ZEND_ARG_TYPE_INFO(0, facing, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-PHP_CLASS_METHOD(validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
+PHP_CLASS_METHOD_EX(validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     zend_long facing = NULL;
 
     ZEND_PARSE_PARAMETERS_START_EX(ZEND_PARSE_PARAMS_THROW, 1, 1)
@@ -149,5 +142,3 @@ void register_facing_class() {
 
 // Undefine so we can use the macros for other classes.
 #undef CLASS_TYPE
-#undef CLASS_NAME
-#undef ARG_INFO_PREFIX

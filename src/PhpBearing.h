@@ -5,16 +5,20 @@
 #ifndef EXT_POCKETMINE_MATH_PHPBEARING_H
 #define EXT_POCKETMINE_MATH_PHPBEARING_H
 
-extern "C" {
-#include "php.h"
-}
+#include "ZendUtil.h"
 
-PHP_METHOD(PhpBearing, toFacing);
-PHP_METHOD(PhpBearing, fromFacing);
-PHP_METHOD(PhpBearing, fromAngle);
-PHP_METHOD(PhpBearing, rotate);
-PHP_METHOD(PhpBearing, opposite);
+// Defines so we can use our macros in ZendUtil.h.
+#define CLASS_TYPE Bearing
+
+PHP_CLASS_METHOD(toFacing);
+PHP_CLASS_METHOD(fromFacing);
+PHP_CLASS_METHOD(fromAngle);
+PHP_CLASS_METHOD(rotate);
+PHP_CLASS_METHOD(opposite);
 
 void register_bearing_class();
+
+// Undefine so we can use the macros for other classes.
+#undef CLASS_TYPE
 
 #endif //EXT_POCKETMINE_MATH_PHPBEARING_H

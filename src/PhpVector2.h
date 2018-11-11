@@ -5,33 +5,37 @@
 #ifndef EXT_POCKETMINE_MATH_PHPVECTOR2_H
 #define EXT_POCKETMINE_MATH_PHPVECTOR2_H
 
-extern "C" {
-#include "php.h"
-}
+#include "ZendUtil.h"
 
 class Vector2;
 
-PHP_METHOD(PhpVector2, __construct);
-PHP_METHOD(PhpVector2, getX);
-PHP_METHOD(PhpVector2, getY);
-PHP_METHOD(PhpVector2, getFloorX);
-PHP_METHOD(PhpVector2, getFloorY);
-PHP_METHOD(PhpVector2, add);
-PHP_METHOD(PhpVector2, subtract);
-PHP_METHOD(PhpVector2, ceil);
-PHP_METHOD(PhpVector2, floor);
-PHP_METHOD(PhpVector2, round);
-PHP_METHOD(PhpVector2, abs);
-PHP_METHOD(PhpVector2, multiply);
-PHP_METHOD(PhpVector2, divide);
-PHP_METHOD(PhpVector2, distance);
-PHP_METHOD(PhpVector2, distanceSquared);
-PHP_METHOD(PhpVector2, length);
-PHP_METHOD(PhpVector2, lengthSquared);
-PHP_METHOD(PhpVector2, normalize);
-PHP_METHOD(PhpVector2, dot);
-PHP_METHOD(PhpVector2, __toString);
+// Defines so we can use our macros in ZendUtil.h.
+#define CLASS_TYPE Vector2
+
+PHP_CLASS_METHOD(__construct);
+PHP_CLASS_METHOD(getX);
+PHP_CLASS_METHOD(getY);
+PHP_CLASS_METHOD(getFloorX);
+PHP_CLASS_METHOD(getFloorY);
+PHP_CLASS_METHOD(add);
+PHP_CLASS_METHOD(subtract);
+PHP_CLASS_METHOD(ceil);
+PHP_CLASS_METHOD(floor);
+PHP_CLASS_METHOD(round);
+PHP_CLASS_METHOD(abs);
+PHP_CLASS_METHOD(multiply);
+PHP_CLASS_METHOD(divide);
+PHP_CLASS_METHOD(distance);
+PHP_CLASS_METHOD(distanceSquared);
+PHP_CLASS_METHOD(length);
+PHP_CLASS_METHOD(lengthSquared);
+PHP_CLASS_METHOD(normalize);
+PHP_CLASS_METHOD(dot);
+PHP_CLASS_METHOD(__toString);
 
 void register_vector2_class();
+
+// Undefine so we can use the macros for other classes.
+#undef CLASS_TYPE
 
 #endif //EXT_POCKETMINE_MATH_PHPVECTOR2_H
