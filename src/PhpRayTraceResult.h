@@ -19,6 +19,8 @@ PHP_CLASS_METHOD(getHitVector);
 
 void register_raytraceresult_class();
 
+zend_class_entry *raytraceresult_class_entry();
+
 // Undefine so we can use the macros for other classes.
 #undef CLASS_TYPE
 

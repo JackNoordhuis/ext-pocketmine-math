@@ -85,5 +85,9 @@ void register_raytraceresult_class() {
     REGISTER_CLASS_PROPERTY("hitVector", ZEND_ACC_PUBLIC);
 }
 
+zend_class_entry *raytraceresult_class_entry() {
+    return PhpRayTraceResult_entry;
+}
+
 // Undefine so we can use the macros for other classes.
 #undef CLASS_TYPE

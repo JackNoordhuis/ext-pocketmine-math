@@ -4,6 +4,57 @@
  */
 
 namespace pocketmine\math {
+class AxisAlignedBB{
+	public $minX;
+	public $minY;
+	public $minZ;
+	public $maxX;
+	public $maxY;
+	public $maxZ;
+
+	public function __construct(float $minX, float $minY, float $minZ, float $maxX, float $maxY, float $maxZ){}
+
+	public function setBounds(float $minX, float $minY, float $minZ, float $maxX, float $maxY, float $maxZ) : \pocketmine\math\AxisAlignedBB{}
+
+	public function setBB(\pocketmine\math\AxisAlignedBB $bb) : \pocketmine\math\AxisAlignedBB{}
+
+	public function addCoord(float $x, float $y, float $z) : \pocketmine\math\AxisAlignedBB{}
+
+	public function expand(float $x, float $y, float $z) : \pocketmine\math\AxisAlignedBB{}
+
+	public function expandedCopy(float $x, float $y, float $z) : \pocketmine\math\AxisAlignedBB{}
+
+	public function offset(float $x, float $y, float $z) : \pocketmine\math\AxisAlignedBB{}
+
+	public function offsetCopy(float $x, float $y, float $z) : \pocketmine\math\AxisAlignedBB{}
+
+	public function contract(float $x, float $y, float $z) : \pocketmine\math\AxisAlignedBB{}
+
+	public function contractedCopy(float $x, float $y, float $z) : \pocketmine\math\AxisAlignedBB{}
+
+	public function calculateXOffset(\pocketmine\math\AxisAlignedBB $bb, float $x) : float{}
+
+	public function calculateYOffset(\pocketmine\math\AxisAlignedBB $bb, float $y) : float{}
+
+	public function calculateZOffset(\pocketmine\math\AxisAlignedBB $bb, float $z) : float{}
+
+	public function intersectsWith(\pocketmine\math\AxisAlignedBB $bb, float $epsilon = null) : bool{}
+
+	public function isVectorInside(\pocketmine\math\Vector3 $bb) : bool{}
+
+	public function getAverageEdgeLength() : float{}
+
+	public function isVectorInYZ(\pocketmine\math\Vector3 $bb) : bool{}
+
+	public function isVectorInXZ(\pocketmine\math\Vector3 $bb) : bool{}
+
+	public function isVectorInXY(\pocketmine\math\Vector3 $bb) : bool{}
+
+	public function calculateIntercept(\pocketmine\math\Vector3 $pos1, \pocketmine\math\Vector3 $pos2) : \pocketmine\math\RayTraceResult{}
+
+	public function __toString() : string{}
+}
+
 class Bearing{
 	public const SOUTH = 0;
 	public const WEST = 1;

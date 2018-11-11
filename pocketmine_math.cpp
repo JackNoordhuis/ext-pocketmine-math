@@ -13,6 +13,7 @@ extern "C" {
 };
 #endif
 
+#include "src/PhpAxisAlignedBB.h"
 #include "src/PhpBearing.h"
 #include "src/PhpFacing.h"
 #include "src/PhpMath.h"
@@ -72,6 +73,7 @@ PHP_MINIT_FUNCTION(pocketmine_math)
 #endif
 
     // register php things
+    register_axisalignedbb_class();
     register_bearing_class();
     register_facing_class();
     register_math_class();

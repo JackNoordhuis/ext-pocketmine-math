@@ -204,13 +204,16 @@ RayTraceResult *AxisAlignedBB::calculateIntercept(Vector3 *pos1, Vector3 *pos2) 
     const Vector3 *vector = nullptr;
     int64_t distance = INT64_MAX;
 
-    const Vector3 *vectors[] = {v1, v2, v3, v4, v5, v6};
-    for(const Vector3 *v : vectors) {
+    for(const Vector3 *v : {v1, v2, v3, v4, v5, v6}) {
         double d = pos1->distanceSquared(v);
         if(v != nullptr and d < distance) {
             vector = v;
             distance = (int64_t)d;
         }
+    }
+
+    if(vector == nullptr) {
+        return nullptr;
     }
 
     int f = -1;
