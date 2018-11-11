@@ -34,9 +34,4 @@ PHP_METHOD(PhpVector2, __toString);
 
 void register_vector2_class();
 
-typedef struct {
-    Vector2 *container;
-    zend_object std;
-} Vector2_obj;
-
 #endif //EXT_POCKETMINE_MATH_PHPVECTOR2_H

@@ -32,20 +32,6 @@ class Facing{
 	public const SOUTH = 3;
 	public const WEST = 4;
 	public const EAST = 5;
-	public const ALL = array (
-  0 => 0,
-  1 => 1,
-  2 => 2,
-  3 => 3,
-  4 => 4,
-  5 => 5,
-);
-	public const HORIZONTAL = array (
-  0 => 2,
-  1 => 3,
-  2 => 4,
-  3 => 5,
-);
 
 	public static function axis(int $direction) : int{}
 
@@ -105,7 +91,7 @@ class Vector2{
 
 	public function lengthSquared() : float{}
 
-	public function normalize() : float{}
+	public function normalize() : \pocketmine\math\Vector2{}
 
 	public function dot(\pocketmine\math\Vector2 $v) : float{}
 

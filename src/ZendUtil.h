@@ -245,17 +245,13 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
  * Defines a php land class constant array of longs from a C-style integer array.
  */
 #define REGISTER_CLASS_CONST_LONG_ARRAY(name, value) do { \
-    HashTable *ht; \
-    ALLOC_HASHTABLE(ht); \
-    int value_len = sizeof(value)/sizeof(value[0]); \
-    zend_hash_init(ht, value_len, NULL, NULL, 0); \
-    for(int i = 0; i < value_len; ++i) { \
-        zval val; \
-        ZVAL_LONG(&val, value[i]); \
-        zend_hash_index_update(ht, i, &val); \
-    } \
     zval arr; \
-    ZVAL_ARR(&arr, ht); \
+    array_init(&arr); \
+    for(int i : value) { \
+        zval val; \
+        ZVAL_LONG(&val, i); \
+        zend_hash_next_index_insert(Z_ARR_P(&arr), &val); \
+    } \
     zend_declare_class_constant(M_CONC(CLASS_NAME, _entry), name, sizeof(name)-1, &arr); \
     } while (0)
 

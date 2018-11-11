@@ -38,7 +38,7 @@ PHP_CLASS_METHOD(axis, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
         Z_PARAM_LONG(direction)
     ZEND_PARSE_PARAMETERS_END();
 
-    RETURN_LONG(Facing::axis((int)direction));
+    RETURN_LONG(Facing::axis((int) direction));
 }
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_isPositive, 0, 1, _IS_BOOL, 0)
@@ -52,7 +52,7 @@ PHP_CLASS_METHOD(isPositive, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
         Z_PARAM_LONG(direction)
     ZEND_PARSE_PARAMETERS_END();
 
-    RETURN_BOOL(Facing::isPositive((int)direction));
+    RETURN_BOOL(Facing::isPositive((int) direction));
 }
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_opposite, 0, 1, IS_LONG, 0)
@@ -66,7 +66,7 @@ PHP_CLASS_METHOD(opposite, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
         Z_PARAM_LONG(direction)
     ZEND_PARSE_PARAMETERS_END();
 
-    RETURN_LONG(Facing::opposite((int)direction));
+    RETURN_LONG(Facing::opposite((int) direction));
 }
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_Facing_rotate, 0, 3, IS_LONG, 0)
@@ -89,8 +89,8 @@ PHP_CLASS_METHOD(rotate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     ZEND_PARSE_PARAMETERS_END();
 
     try {
-        result = Facing::rotate((int)direction, (int)axis, clockwise);
-    } catch(std::invalid_argument &e) {
+        result = Facing::rotate((int) direction, (int) axis, clockwise);
+    } catch (std::invalid_argument &e) {
         zend_throw_exception_ex(spl_ce_InvalidArgumentException, 0, e.what());
         return;
     }
@@ -110,8 +110,8 @@ PHP_CLASS_METHOD(validate, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC) {
     ZEND_PARSE_PARAMETERS_END();
 
     try {
-        Facing::validate((int)facing);
-    } catch(std::invalid_argument &e) {
+        Facing::validate((int) facing);
+    } catch (std::invalid_argument &e) {
         zend_throw_exception_ex(spl_ce_InvalidArgumentException, 0, e.what());
         return;
     }
@@ -141,8 +141,10 @@ void register_facing_class() {
     REGISTER_CLASS_CONST_LONG("WEST", Facing::WEST);
     REGISTER_CLASS_CONST_LONG("EAST", Facing::EAST);
 
-    REGISTER_CLASS_CONST_LONG_ARRAY("ALL", Facing::ALL);
-    REGISTER_CLASS_CONST_LONG_ARRAY("HORIZONTAL", Facing::HORIZONTAL);
+//    TODO: Fix this
+//    don't register arrays as constats, they cause too many issues
+//    REGISTER_CLASS_CONST_LONG_ARRAY("ALL", Facing::ALL);
+//    REGISTER_CLASS_CONST_LONG_ARRAY("HORIZONTAL", Facing::HORIZONTAL);
 }
 
 // Undefine so we can use the macros for other classes.
