@@ -16,6 +16,7 @@ extern "C" {
 #include "src/PhpBearing.h"
 #include "src/PhpFacing.h"
 #include "src/PhpMath.h"
+#include "src/PhpRayTraceResult.h"
 #include "src/PhpVector2.h"
 
 extern "C" {
@@ -74,6 +75,7 @@ PHP_MINIT_FUNCTION(pocketmine_math)
     register_bearing_class();
     register_facing_class();
     register_math_class();
+    register_raytraceresult_class();
     register_vector2_class();
 
     return SUCCESS;

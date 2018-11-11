@@ -274,8 +274,11 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
 /*
 * Define a php class property.
 */
-#define REGISTER_CLASS_PROPERTY(name, acc_flags) \
-    REGISTER_CLASS_PROPERTY_EX(name, acc_flags, NULL)
+#define REGISTER_CLASS_PROPERTY(name, acc_flags) do { \
+    zval temp; \
+    ZVAL_NULL(&temp); \
+    REGISTER_CLASS_PROPERTY_EX(name, acc_flags, &temp); \
+    }while(0)
 
 /*
  * Define a php class property of type float with a default value.

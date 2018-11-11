@@ -53,6 +53,20 @@ class Math{
 	public static function solveQuadratic(float $a, float $b, float $c) : array{}
 }
 
+class RayTraceResult{
+	public $bb;
+	public $hitFace;
+	public $hitVector;
+
+	public function __construct(\pocketmine\math\AxisAlignedBB $bb, int $hitface, \pocketmine\math\Vector3 $hitVector){}
+
+	public function getBoundingBox() : \pocketmine\math\AxisAlignedBB{}
+
+	public function getHitFace() : int{}
+
+	public function getHitVector() : \pocketmine\math\Vector3{}
+}
+
 class Vector2{
 	public $x;
 	public $y;
