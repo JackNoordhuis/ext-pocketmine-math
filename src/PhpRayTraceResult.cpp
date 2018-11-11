@@ -35,7 +35,7 @@ PHP_CLASS_METHOD_EX(__construct, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR) {
     UPDATE_CLASS_PROPERTY_LONG("hitFace", hitFace);
     UPDATE_CLASS_PROPERTY("hitVector", hitVector);
 
-    SET_PHP_OBJECT_CONTAINER(new RayTraceResult((const AxisAlignedBB *)FETCH_PHP_OBJECT_CONTAINER_OTHER(bb), (int)hitFace, (const Vector3 *)FETCH_PHP_OBJECT_CONTAINER_OTHER(hitVector)));
+    SET_PHP_OBJECT_CONTAINER(new RayTraceResult(FETCH_PHP_OBJECT_CONTAINER_OTHER_EX(AxisAlignedBB, bb), (int)hitFace, FETCH_PHP_OBJECT_CONTAINER_OTHER_EX(Vector3, hitVector)));
 }
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO(ARG_INFO_NAME(getBoundingBox), pocketmine\\math\\AxisAlignedBB, 0)
