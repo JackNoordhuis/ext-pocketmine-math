@@ -8,6 +8,9 @@
 
 #ifdef POCKETMINE_MATH_DEBUG
 #include <iostream>
+extern "C" {
+#include <SAPI.h>
+};
 #endif
 
 #include "src/PhpBearing.h"
@@ -16,7 +19,6 @@
 #include "src/PhpVector2.h"
 
 extern "C" {
-#include <SAPI.h>
 #include "ext/standard/info.h"
 #include "php_pocketmine_math.h" // this one has to be C always, so the engine can understand it
 }
